@@ -1,97 +1,72 @@
 "use strict";
 
 
-
 window.onload = () => {
-
-    const mountainListRow = document.getElementById("mountainsListrow");
-
+    const mountainsListRow = document.getElementById("mountainsListRow");
     console.log("onload");
-
-
-    for(let mountain of montain){
-        let mountainColumnElement = createStudentColumnElement(mountain);
-        mountainListRow.appendChild(mountainColumnElement);
-    }
-
-
+    mountainsArray.forEach((mountain, index) => {
+        let mountainColumnElement = createMountainColumnElement(mountain, index);
+        mountainsListRow.appendChild(mountainColumnElement);
+    });
 };
 
-/* <div id="studentListRow" class="row">
-<div class="col">
-    <div class="card studentcard">
-        <img src="https://picsum.photos/200/200?random=1" class="card-img-top" alt="Mireya Avila">
-        <div class="card-body">
-          <h5 class="card-title">Mireya Avila</h5>
-          <p class="card-text">
-            <a href="mailto://mavila@appdev.yearup.org">mavila@appdev.yearup.org</a>
-          </p>
-          <p>
-            <a href="https://github.com/mireyaavila01" target="_blank">https://github.com/mireyaavila01</a>
-          </p>
 
-          <a href="#" class="btn btn-primary">Learn More about Mireya Avila</a>
-        </div>
-      </div>
-</div> */
 
-function createmontainColumnElement(mountain){
+ function createMountainColumnElement(mountain, index) {
+    // Create the column div for the mountain
     let mountainColumnDiv = document.createElement("div");
+    mountainColumnDiv.className = "col-lg-3 mb-4";
 
-    mountainColumnDiv.className = "col";
-
+    // Create a card element to display the mountains
     let mountainCardDiv = document.createElement("div");
-    mountainCardDiv.className = "card mountaincard";
+    mountainCardDiv.className = "card mountain-card shadow";
 
+    //  the card to the column div
     mountainColumnDiv.appendChild(mountainCardDiv);
 
+    // Add the image to card
     let mountainImage = document.createElement("img");
-    mountainImage.src = mountain.imageurl;
+    mountainImage.src = "images/" + mountain.img;
     mountainImage.className = "card-img-top";
     mountainImage.alt = mountain.name;
+    mountainCardDiv.appendChild(mountainImage);
 
-    mountainCardDiv.appendChild(studentImage);
-
+    // Create a card 
     let cardBodyDiv = document.createElement("div");
     cardBodyDiv.className = "card-body";
-
     mountainCardDiv.appendChild(cardBodyDiv);
 
-    let mountainHeadedTag = document.createElement("h5");
-    mountainHeadedTag.innerHTML = student.name;
+    // Add the name of the mountain 
+    let mountainHeading = document.createElement("h5");
+    mountainHeading.className = "card-title";
+    mountainHeading.innerText = mountain.name;
+    cardBodyDiv.appendChild(mountainHeading);
 
-    cardBodyDiv.appendChild(mountainHeadedTag);
+    // Button 
+    let infoButton = document.createElement("button");
+    infoButton.className = "btn btn-primary w-100";
+    infoButton.setAttribute("data-bs-toggle", "offcanvas");
+    infoButton.setAttribute("data-bs-target", "#offcanvasDetails" + index);
+    infoButton.innerText = "About " + mountain.name;
+    cardBodyDiv.appendChild(infoButton);
 
+    // Div to display 
+    let detailsDiv = document.createElement("div");
+    detailsDiv.className = "offcanvas offcanvas-start text-bg-dark";
+    detailsDiv.setAttribute("data-bs-scroll", "true")
+    detailsDiv.setAttribute("tabindex", "-1")
+    detailsDiv.id = "offcanvasDetails" + index;
+    mountainColumnDiv.appendChild(detailsDiv);
 
-    let paraEmail = document.createElement("p");
-    paraEmail.className = "card-text";
-
-    cardBodyDiv.appendChild(paraEmail);
-
-
-    let aEmail = document.createElement("a");
-    aEmail.href = "mailto://" + student.email;
-    aEmail.innerHTML = student.email;
-
-    paraEmail.appendChild(aEmail);
-
-
-    let paraGithub = document.createElement("p");
-    cardBodyDiv.appendChild(paraGithub);
-
-    let aGithub = document.createElement("a");
-    aGithub.href = student.githuburl;
-    aGithub.innerHTML = student.githuburl;
-    paraGithub.appendChild(aGithub);
-
-
-    let aButton = document.createElement("a");
-    aButton.className = "btn btn-primary";
-    aButton.innerHTML = "Learn more about " + student.name;
-    aButton.href = "#";
-
-    cardBodyDiv.appendChild(aButton);
-
+    // show image
+    let detailsContent = `
+        <h3 class="mx-3 mt-5">Name: ${mountain.name}</h3>
+        <h6 class="mx-3 mt-2"><strong>Effort:</strong> ${mountain.effort}</h6>
+        <h6 class="mx-3 mt-2"><strong>Elevation:</strong> ${mountain.elevation} feet</h6>
+        <img src="images/${mountain.img}" class="card-img-top" alt="${mountain.name}">
+        <p class="offcanvas-body"><strong>Description:</strong> ${mountain.desc}</p>
+    `;
+    detailsDiv.innerHTML = detailsContent;
 
 
 
