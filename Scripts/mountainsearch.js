@@ -1,9 +1,18 @@
 "use strict";
 
 
+
+
+
+
+
+
+
 window.onload = () => {
     const mountainsListRow = document.getElementById("mountainsListRow");
     console.log("onload");
+    // array called mountainsArray
+   
     mountainsArray.forEach((mountain, index) => {
         let mountainColumnElement = createMountainColumnElement(mountain, index);
         mountainsListRow.appendChild(mountainColumnElement);
@@ -11,7 +20,7 @@ window.onload = () => {
 };
 
 
-
+ //For each mountain in the mountainsArray, it calls the function createMountainColumnElement to create a card element for that mountain
  function createMountainColumnElement(mountain, index) {
     // Create the column div for the mountain
     let mountainColumnDiv = document.createElement("div");

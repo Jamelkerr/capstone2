@@ -1,4 +1,6 @@
+//helps catch common coding mistakes and "unsafe" actions
 "use strict";
+//selects various elements from the DOM using getElementById and assigns them to variables:
 const locationSelect = document.getElementById("location-select");
 const parkTypeSelect = document.getElementById("park-type-select");
 const searchForm = document.getElementById("search-form");
@@ -7,7 +9,7 @@ const searchResults = document.getElementById("search-results");
 window.onload = function () {
     
 };
-
+//Two for loops iterate over locationsArray and parkTypesArray
 for (let i = 0; i < locationsArray.length; i++) {
     const option = document.createElement("option");
     option.value = locationsArray[i];
@@ -21,6 +23,7 @@ for (let i = 0; i < parkTypesArray.length; i++) {
     option.textContent = parkTypesArray[i];
     parkTypeSelect.appendChild(option);
 }
+//There's a function called searchNationalParks(location, parkType)
 function searchNationalParks(location, parkType) {
     const filteredParks = [];
     for (let i = 0; i < nationalParksArray.length; i++) {
@@ -30,10 +33,12 @@ function searchNationalParks(location, parkType) {
     }
     displaySearchResults(filteredParks);
 }
+
+//function clears the HTML content of the searchResults
 function displaySearchResults(parks) {
     searchResults.innerHTML = "";
     if (parks.length === 0) {
-        searchResults.innerHTML = "<p>No matching parks found.</p>";
+        searchResults.innerHTML = "<p>No parks found.</p>";
         return;
     }
     for (let i = 0; i < parks.length; i++) {
@@ -48,6 +53,7 @@ function displaySearchResults(parks) {
         searchResults.appendChild(parkElement);
     }
 }
+//retrieves the selected location and park type values
 searchForm.onsubmit = function (event) {
     event.preventDefault();
     const location = locationSelect.value;
