@@ -2,12 +2,6 @@
 
 
 
-
-
-
-
-
-
 window.onload = () => {
     const mountainsListRow = document.getElementById("mountainsListRow");
     console.log("onload");

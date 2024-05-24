@@ -1,5 +1,7 @@
 //helps catch common coding mistakes and "unsafe" actions
 "use strict";
+
+
 //selects various elements from the DOM using getElementById and assigns them to variables:
 const locationSelect = document.getElementById("location-select");
 const parkTypeSelect = document.getElementById("park-type-select");
